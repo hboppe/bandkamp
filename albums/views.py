@@ -12,9 +12,7 @@ class AlbumView(APIView, PageNumberPagination):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request):
-        """
-        Obtençao de albums
-        """
+
         albums = Album.objects.all()
 
         result_page = self.paginate_queryset(albums, request)
@@ -23,9 +21,7 @@ class AlbumView(APIView, PageNumberPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request):
-        """
-        Criaçao de album
-        """
+
         serializer = AlbumSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=request.user)

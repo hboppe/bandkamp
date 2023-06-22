@@ -8,9 +8,7 @@ from .permissions import IsAccountOwner
 
 class UserView(APIView):
     def post(self, request: Request) -> Response:
-        """
-        Registro de usuários
-        """
+
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
@@ -24,9 +22,7 @@ class UserDetailView(APIView):
     permission_classes = [IsAccountOwner]
 
     def get(self, request: Request, pk: int) -> Response:
-        """
-        Obtençao de usuário
-        """
+
         user = get_object_or_404(User, pk=pk)
 
         self.check_object_permissions(request, user)
@@ -36,9 +32,6 @@ class UserDetailView(APIView):
         return Response(serializer.data)
 
     def patch(self, request: Request, pk: int) -> Response:
-        """
-        Atualização de usuário
-        """
         user = get_object_or_404(User, pk=pk)
 
         self.check_object_permissions(request, user)
@@ -47,12 +40,10 @@ class UserDetailView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response(serializer.data)
+        return Response(serializer.data, status.HTTP_200_OK)
 
     def delete(self, request: Request, pk: int) -> Response:
-        """
-        Deleçao de usuário
-        """
+
         user = get_object_or_404(User, pk=pk)
 
         self.check_object_permissions(request, user)
