@@ -4,20 +4,6 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(
-        validators=[
-            UniqueValidator(
-                queryset=User.objects.all(),
-                message="A user with that username already exists.",
-            )
-        ]
-    )
-
-    email = serializers.EmailField(
-        validators=[
-            UniqueValidator(User.objects.all(), message="This field must be unique.")
-        ]
-    )
 
     def create(self, validated_data: dict) -> User:
         return User.objects.create_user(**validated_data)
