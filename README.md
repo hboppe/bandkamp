@@ -1,4 +1,4 @@
-# Albums and sonds API
+# Albums and songs API
 
 An API was built in Django that allows users to sign up, log in, and register albums and songs. In its first version, it used APIView, Serializer, and SQLite3.
 
